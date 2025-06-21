@@ -309,6 +309,7 @@ uint64_t get_kernel_base()
     uint64_t kernelPage = 0;
     kextrw_get_reset_vector(gClient, &kernelPage);
     if (!kernelPage) return 0;
+    kernelPage &= ~(PAGE_SIZE - 1);
 
     uint64_t kernelBase = 0;
     while (!kernelBase) {
